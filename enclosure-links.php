@@ -27,11 +27,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
-/**
- * 
- * 
- * @package 
- **/
 class SW_Enclosure_Links {
 
 	/**
@@ -92,9 +87,7 @@ class SW_Enclosure_Links {
 		$this->in_save_post = true;
 
 		$post_urls = wp_extract_urls( $post->post_content );
-		// var_dump( $post_urls );
 		$meta = get_post_meta( $post_ID );
-		// var_dump( $meta );
 		foreach ( $meta as $meta_key => $meta_values ) {
 			foreach ( $meta_values as $meta_value ) {
 				if ( 'enclosure' != $meta_key ) {
@@ -102,12 +95,10 @@ class SW_Enclosure_Links {
 				}
 				// What URLs are in the enclosure?
 				$enclosure_urls = wp_extract_urls( $meta_value );
-				// var_dump( $enclosure_urls );
 				
 				// Ensure the enclosure URLs in the post_urls
 				foreach ( $enclosure_urls as $enclosure_url ) {
 					if ( ! in_array( $enclosure_url, $post_urls ) ) {
-						// var_dump( $enclosure_url );
 						$this->add_url_as_link_in_post( $post_ID, $enclosure_url );
 						// Update our knowledge of post URLs
 						$post_urls = wp_extract_urls( get_post( $post_ID )->post_content );
@@ -116,7 +107,6 @@ class SW_Enclosure_Links {
 			}
 		}
 
-		// exit;
 		$this->in_save_post = false;
 	}
 
@@ -156,7 +146,6 @@ class SW_Enclosure_Links {
 			$link_text = __( 'Download', 'enclosure-links' );
 		}
 		$post_data[ 'post_content' ] .= "<p class='sw-enclosure-link'><a href='$enclosure_url'>$link_text</a></p>";
-		// var_dump( $post_data[ 'post_content' ] );
 		wp_update_post( $post_data );
 	}
 
