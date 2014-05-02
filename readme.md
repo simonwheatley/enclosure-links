@@ -1,4 +1,4 @@
-# Magnificent
+# Enclosure Links
 
 * Contributors: simonwheatley
 * Tested up to: 3.9
